@@ -1,0 +1,17 @@
+---
+- name: load credstash
+  pip: name=credstash version={{ credstash_version }}
+
+- name: call credstash module
+  credstash:
+    secret: "{{ item.secret }}"
+    fact: "{{ item.fact|default(omit) }}"
+    fact_type: "{{ item.fact_type|default(omit) }}"
+    mode: "{{ item.mode|default(omit) }}"
+    value: "{{ item.value|default(omit) }}"
+    key: "{{ item.key|default(omit) }}"
+    region: "{{ item.region|default(omit) }}"
+    table: "{{ item.table|default(omit) }}"
+    version: "{{ item.version|default(omit) }}"
+    context: "{{ item.context|default(omit) }}"
+  with_items: "{{ secrets|default([]) }}"
