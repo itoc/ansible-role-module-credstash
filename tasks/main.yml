@@ -1,7 +1,4 @@
 ---
-- name: load credstash
-  pip: name=credstash version={{ credstash_version }}
-
 - name: call credstash module
   credstash:
     secret: "{{ item.secret }}"
@@ -14,4 +11,5 @@
     table: "{{ item.table|default(omit) }}"
     version: "{{ item.version|default(omit) }}"
     context: "{{ item.context|default(omit) }}"
+    autoversion: "{{ item.autoversion }}"
   with_items: "{{ secrets|default([]) }}"
