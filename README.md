@@ -1,11 +1,12 @@
 # ansible-role-module-credstash
-ansible role which embeds module for credstash lookups
+Credstash module which accepts PUT and GET commands.
 
-Role Variables
+# Variables
 
 ```
 secrets: 
-  secret:  <= required
+- secret:  <= required
+  autoversion:
   fact: 
   fact_type: 
   mode: 
@@ -16,26 +17,21 @@ secrets:
   version: 
   context: 
 ```
-  
-
-Dependencies
-
-None
-
-Module Requirements/Dependencies
-
-Python: yaml/json
-
-Example Playbook
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+# Example
 
 ```
 - hosts: servers
-  roles: 
-     - { role: ansible-role-module-credstash, secrets: [{"secret": "mysecret", "fact": "mysecret_fact", "fact_type":"yaml" }] }
+  vars:
+    secrets:
+      - secret: mypassword
+        value: secret123
+        mode: put
+        autoversion: true
+        region: ap-southeast-2
+  tasks:
+    - include: credstash.yml
 ```
 
-License
+# License
 
 BSD
