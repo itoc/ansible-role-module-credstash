@@ -11,5 +11,5 @@
     table: "{{ item.table|default(omit) }}"
     version: "{{ item.version|default(omit) }}"
     context: "{{ item.context|default(omit) }}"
-    autoversion: "{{ item.autoversion }}"
+    autoversion: "{{ item.autoversion|default(omit)}}"
   with_items: "{{ secrets|default([]) }}"
